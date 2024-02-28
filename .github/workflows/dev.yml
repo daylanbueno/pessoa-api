@@ -30,7 +30,7 @@ jobs:
           source: "./target/pessoa-api-0.0.1-SNAPSHOT.jar"
           target: "/home/ec2-user"
 
-      - name: Remote ssh EC2  deploy o api para la
+      - name: executando API
         uses: appleboy/ssh-action@v0.1.7
         with:
           host: ec2-35-171-89-239.compute-1.amazonaws.com
@@ -38,4 +38,4 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            cd target && java -jar pessoa-api-0.0.1-SNAPSHOT.jar
+            cd target && nohup java -jar pessoa-api-0.0.1-SNAPSHOT.jar
