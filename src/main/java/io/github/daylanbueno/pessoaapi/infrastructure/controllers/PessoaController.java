@@ -32,4 +32,10 @@ public class PessoaController {
                 .stream().map(pessoaDtoMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+    @GetMapping("/app")
+    public String  app() {
+        return "Olá app";
+    }
+
 }
