@@ -19,3 +19,13 @@ jobs:
 
       - name: Build project
         run: mvn clean install && ls
+
+      - name: Remote ssh EC2 and deploy new imagens
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ec2-35-171-89-239.compute-1.amazonaws.com
+          username: ubuntu
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: |
+            ls
