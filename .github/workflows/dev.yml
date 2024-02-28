@@ -28,9 +28,9 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           source: "target/pessoa-api-0.0.1-SNAPSHOT.jar"
-          target: "/home/ec2-user"
+          target: "/home/ec2-user/pessoa-api-0.0.1-SNAPSHOT.jar"
 
-      - name: Remote ssh EC2  deploy o api para la
+      - name: Executtando aplicação.
         uses: appleboy/ssh-action@v0.1.7
         with:
           host: ec2-35-171-89-239.compute-1.amazonaws.com
