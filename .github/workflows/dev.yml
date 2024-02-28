@@ -18,4 +18,4 @@ jobs:
           java-version: "21"
 
       - name: Build project
-        run: mvn clean install -DskipTests && ls
+        run: mvn clean install && ls
