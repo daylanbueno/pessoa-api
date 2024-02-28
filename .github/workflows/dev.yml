@@ -20,16 +20,6 @@ jobs:
       - name: Build project
         run: mvn clean install && ls
 
-      - name: Remove existing JAR file
-        uses: appleboy/ssh-action@v0.1.7
-        with:
-          host: ec2-35-171-89-239.compute-1.amazonaws.com
-          username: ec2-user
-          key: ${{ secrets.SSH_KEY }}
-          port: 22
-          script: |
-            rm -f /home/ec2-user/target/pessoa-api-0.0.1-SNAPSHOT.jar
-
       - name: Copy JAR to EC2
         uses: appleboy/scp-action@master
         with:
@@ -48,4 +38,4 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            cd target && screen -S minha-api -d -m java -jar pessoa-api-0.0.1-SNAPSHOT.jar
+            cd target  nohup java -jar target/pessoa-api-0.0.1-SNAPSHOT.jar > output.log 2>&1 &
