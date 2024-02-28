@@ -40,16 +40,6 @@ jobs:
           source: "./target/pessoa-api-0.0.1-SNAPSHOT.jar"
           target: "/home/ec2-user"
 
-      - name: Parar aplicação anterior
-        uses: appleboy/ssh-action@v0.1.7
-        with:
-          host: ec2-35-171-89-239.compute-1.amazonaws.com
-          username: ec2-user
-          key: ${{ secrets.SSH_KEY }}
-          port: 22
-          script: |
-            cd target &&  pkill -f pessoa-api-0.0.1-SNAPSHOT.jar || true
-
       - name: Executar nova instância da API
         uses: appleboy/ssh-action@v0.1.7
         with:
