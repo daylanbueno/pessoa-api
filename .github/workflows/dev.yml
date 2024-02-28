@@ -28,7 +28,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            rm -rf /home/ec2-user/target
+            sudo rm -rf /home/ec2-user/target
 
       - name: Copy JAR to EC2
         uses: appleboy/scp-action@master
