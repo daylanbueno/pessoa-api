@@ -48,7 +48,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            pkill -f pessoa-api-0.0.1-SNAPSHOT.jar || true
+            cd target &&  pkill -f pessoa-api-0.0.1-SNAPSHOT.jar || true
 
       - name: Executar nova instância da API
         uses: appleboy/ssh-action@v0.1.7
