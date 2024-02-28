@@ -20,6 +20,16 @@ jobs:
       - name: Build project
         run: mvn clean install && ls
 
+      - name: Parar instância anterior da API (se estiver em execução)
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ec2-35-171-89-239.compute-1.amazonaws.com
+          username: ec2-user
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: |
+            pkill -f "java -jar pessoa-api-0.0.1-SNAPSHOT.jar" || true
+
       - name: Copy JAR to EC2
         uses: appleboy/scp-action@master
         with:
