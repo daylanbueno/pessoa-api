@@ -17,10 +17,10 @@ jobs:
           distribution: "zulu"
           java-version: "21"
 
-      - name: Build project
+      - name: Build do projeto
         run: mvn clean install && ls
 
-      - name: Removendo jar antigo
+      - name: Removendo jar antigo se existir
         uses: appleboy/ssh-action@v0.1.7
         with:
           host: ec2-35-171-89-239.compute-1.amazonaws.com
@@ -30,7 +30,7 @@ jobs:
           script: |
             rm -rf /home/ec2-user/target
 
-      - name: Copy JAR to EC2
+      - name: Copiando JAR para EC2
         uses: appleboy/scp-action@master
         with:
           host: ec2-35-171-89-239.compute-1.amazonaws.com
