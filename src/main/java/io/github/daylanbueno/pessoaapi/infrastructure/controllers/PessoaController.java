@@ -35,7 +35,7 @@ public class PessoaController {
 
     @GetMapping("/app")
     public String  app() {
-        return "fazendo teste do deploy";
+        return "funcionando";
     }
 
 }
