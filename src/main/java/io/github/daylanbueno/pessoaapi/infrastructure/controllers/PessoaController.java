@@ -35,7 +35,7 @@ public class PessoaController {
 
     @GetMapping("/app")
     public String  app() {
-        return "funcionando";
+        return "outro teste...";
     }
 
 }
