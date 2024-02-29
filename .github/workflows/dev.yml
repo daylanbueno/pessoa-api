@@ -40,6 +40,19 @@ jobs:
           source: "./target/pessoa-api-0.0.1-SNAPSHOT.jar"
           target: "/home/ec2-user"
 
+      - name: Parando instância anterior da API
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ec2-35-171-89-239.compute-1.amazonaws.com
+          username: ec2-user
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: |
+            PID=$(sudo lsof -ti :8080)
+            if [ ! -z "$PID" ]; then
+              sudo kill -9 $PID
+            fi
+
       - name: Executar nova instância da API
         uses: appleboy/ssh-action@v0.1.7
         with:
