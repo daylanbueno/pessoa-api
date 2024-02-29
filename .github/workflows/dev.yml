@@ -48,4 +48,4 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            cd target  nohup java -jar target/pessoa-api-0.0.1-SNAPSHOT.jar > output.log 2>&1 &
+            cd target nohup java -jar target/pessoa-api-0.0.1-SNAPSHOT.jar > output.log 2>&1 &
