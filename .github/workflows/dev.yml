@@ -12,6 +12,9 @@ jobs:
 
             - name: Fazendo configuracao do java
               uses: actions/setup-java@v3
+              with: 
+                distribution: "zulu"
+                java-version: "21"
 
             - name: Fazendo build do projeto
               run:  mvn clean install && ls
