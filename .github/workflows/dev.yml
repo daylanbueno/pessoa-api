@@ -18,5 +18,20 @@ jobs:
 
             - name: Fazendo build do projeto
               run:  mvn clean install && ls
+              
+            - name: Removendo jar antigo se existir
+              uses: appleboy/scp-action@master
+              with: 
+                host: ec2-34-230-1-40.compute-1.amazonaws.com
+                username: ec2-user
+                key: ${{ secrets.PESSOA_KEY }}
+                port: 22
+                script: |
+                    PID=$(sudo lsof -ti :8080)
+                    if [ ! -z "$PID" ]; then
+                    sudo kill -9 $PID
+                    fi
+
+
             
 
