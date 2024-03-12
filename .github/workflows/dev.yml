@@ -19,7 +19,7 @@ jobs:
             - name: Fazendo build do projeto
               run:  mvn clean install && ls
               
-            - name: Removendo jar antigo se existir
+            - name: Removendo jar antigo se existir!
               uses: appleboy/ssh-action@v0.1.7
               with: 
                 host: ec2-34-230-1-40.compute-1.amazonaws.com
