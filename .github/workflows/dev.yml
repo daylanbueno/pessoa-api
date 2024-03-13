@@ -20,7 +20,17 @@ jobs:
 
             - name: Fazendo build do projeto
               run: mvn clean install && ls
-            
+   
+            - name: Removendo jar antigo se existir
+              uses: appleboy/ssh-action@v0.1.7
+              with:
+                host: ec2-34-230-1-40.compute-1.amazonaws.com
+                username: ec2-user
+                key: ${{ secrets.PESSOA_KEY }}
+                port: 22
+                script: |
+                    rm -rf /home/ec2-user/target 
+
             - name: Copiando JAR para EC2
               uses: appleboy/scp-action@master
               with:
