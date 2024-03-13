@@ -35,7 +35,7 @@ public class PessoaController {
 
     @GetMapping("/app")
     public String  app() {
-        return "Testando github actions....";
+        return "Testando github actions";
     }
 
 }
