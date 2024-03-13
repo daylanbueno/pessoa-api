@@ -1,37 +1,23 @@
 name: Deploy no ambiente de desenvolvimento
 
-on: 
-    push: 
-        branches: [main]
+on:
+   push:
+    branches: [main]
+
 jobs: 
     build:
         runs-on: ubuntu-latest
+
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
 
             - name: Fazendo configuracao do java
               uses: actions/setup-java@v3
-              with: 
+              with:
                 distribution: "zulu"
                 java-version: "21"
 
             - name: Fazendo build do projeto
-              run:  mvn clean install && ls
-              
-            - name: Removendo jar antigo se existir!
-              uses: appleboy/ssh-action@v0.1.7
-              with: 
-                host: ec2-34-230-1-40.compute-1.amazonaws.com
-                username: ec2-user
-                key: ${{ secrets.PESSOA_KEY }}
-                port: 22
-                script: |
-                    PID=$(sudo lsof -ti :8080)
-                    if [ ! -z "$PID" ]; then
-                    sudo kill -9 $PID
-                    fi
-
-
-            
-
+              run: mvn clean install && ls
+   
