@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: daylanbueno/pessoa-api
+    container_name: pessoa-api
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./target:/app
