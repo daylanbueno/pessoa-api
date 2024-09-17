@@ -32,3 +32,8 @@ build/
 ### VS Code ###
 .vscode/
 /.lh/.lhignore
+.lh/k8s/deployment.yaml.json
+.lh/k8s/pod.yaml.json
+.lh/k8s/replicaset.yaml.json
+.lh/k8s/service.yaml.json
+.lh/.gitignore.json

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment  
+metadata:
+  name: pessoa-replicaset
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: pessoa-api
+  template:
+    metadata:
+      labels:
+        app: pessoa-api
+    spec:
+      containers:
+      - name: pessoa-api
+        image: daylanbueno/pessoa-api:latest
+        ports:
+        - containerPort: 8080
