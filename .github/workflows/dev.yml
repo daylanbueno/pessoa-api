@@ -20,46 +20,69 @@ jobs:
 
             - name: Fazendo build do projeto
               run: mvn clean install && ls
+
+            - name: Fazendo  login no DockerHub
+              env:
+                DOCKER_USER: ${{secrets.DOCKER_USER}}
+                DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+              run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+            - name: Criando .env file
+              run: |
+                echo "RDS_HOSTNAME=${{ secrets.RDS_HOSTNAME }}" >> .env
+                echo "RDS_PORT=${{ secrets.RDS_PORT }}" >> .env
+                echo "RDS_USERNAME=${{ secrets.RDS_USERNAME }}" >> .env
+                echo "RDS_PASSWORD=${{ secrets.RDS_PASSWORD }}" >> .env
+                echo "SPRING_PROFILES_ACTIVE=prod" >> .env
+
+            - name: Construindo imagem
+              run: docker-compose build
+
+
+            - name: Push Docker image
+              run: |
+                docker tag daylanbueno/pessoa-api:latest ${{ secrets.DOCKER_USERNAME }}/pessoa-api:latest
+                docker push ${{ secrets.DOCKER_USERNAME }}/pessoa-api:latest
    
-            - name: Removendo jar antigo se existir
-              uses: appleboy/ssh-action@v0.1.7
-              with:
-                host: ec2-34-230-1-40.compute-1.amazonaws.com
-                username: ec2-user
-                key: ${{ secrets.PESSOA_KEY }}
-                port: 22
-                script: |
-                    rm -rf /home/ec2-user/target 
+            # - name: Removendo jar antigo se existir
+            #   uses: appleboy/ssh-action@v0.1.7
+            #   with:
+            #     host: ec2-34-230-1-40.compute-1.amazonaws.com
+            #     username: ec2-user
+            #     key: ${{ secrets.PESSOA_KEY }}
+            #     port: 22
+            #     script: |
+            #         rm -rf /home/ec2-user/target 
 
-            - name: Copiando JAR para EC2
-              uses: appleboy/scp-action@master
-              with:
-                host: ec2-34-230-1-40.compute-1.amazonaws.com
-                username: ec2-user
-                key: ${{ secrets.PESSOA_KEY }}
-                port: 22
-                source: "./target/pessoa-api-0.0.1-SNAPSHOT.jar"
-                target: "/home/ec2-user"
+            # - name: Copiando JAR para EC2
+            #   uses: appleboy/scp-action@master
+            #   with:
+            #     host: ec2-34-230-1-40.compute-1.amazonaws.com
+            #     username: ec2-user
+            #     key: ${{ secrets.PESSOA_KEY }}
+            #     port: 22
+            #     source: "./target/pessoa-api-0.0.1-SNAPSHOT.jar"
+            #     target: "/home/ec2-user"
 
-            - name: Parando instancia anteiror da API
-              uses: appleboy/ssh-action@v0.1.7
-              with:
-                host: ec2-34-230-1-40.compute-1.amazonaws.com
-                username: ec2-user
-                key: ${{ secrets.PESSOA_KEY }}
-                port: 22
-                script: |
-                    PID=$(sudo lsof -ti :8080)
-                    if [ ! -z "$PID" ]; then
-                        sudo kill -9 $PID
-                    fi
+            # - name: Parando instancia anteiror da API
+            #   uses: appleboy/ssh-action@v0.1.7
+            #   with:
+            #     host: ec2-34-230-1-40.compute-1.amazonaws.com
+            #     username: ec2-user
+            #     key: ${{ secrets.PESSOA_KEY }}
+            #     port: 22
+            #     script: |
+            #         PID=$(sudo lsof -ti :8080)
+            #         if [ ! -z "$PID" ]; then
+            #             sudo kill -9 $PID
+            #         fi
 
-            - name: Executando nova instancia da API
-              uses: appleboy/ssh-action@v0.1.7
-              with:
-                host: ec2-34-230-1-40.compute-1.amazonaws.com
-                username: ec2-user
-                key: ${{ secrets.PESSOA_KEY }}
-                port: 22
-                script: |
-                 nohup java -jar target/pessoa-api-0.0.1-SNAPSHOT.jar > output.log 2>&1 &
+            # - name: Executando nova instancia da API
+            #   uses: appleboy/ssh-action@v0.1.7
+            #   with:
+            #     host: ec2-34-230-1-40.compute-1.amazonaws.com
+            #     username: ec2-user
+            #     key: ${{ secrets.PESSOA_KEY }}
+            #     port: 22
+            #     script: |
+            #      nohup java -jar target/pessoa-api-0.0.1-SNAPSHOT.jar > output.log 2>&1 &
