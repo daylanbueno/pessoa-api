@@ -48,8 +48,8 @@ jobs:
 
             - name: Push Docker image
               run: |
-                docker tag ${{ secrets.DOCKER_USERNAME }}/pessoa-api:latest ${{ secrets.DOCKER_USERNAME }}/pessoa-api:prod
-                docker push ${{ secrets.DOCKER_USERNAME }}/pessoa-api:prod
+                docker tag daylanbueno/pessoa-api:latest ${{ secrets.DOCKER_USERNAME }}/pessoa-api:latest
+                docker push ${{ secrets.DOCKER_USERNAME }}/pessoa-api:latest
 
             # - name: Removendo jar antigo se existir
             #   uses: appleboy/ssh-action@v0.1.7
