@@ -37,3 +37,4 @@ build/
 .lh/k8s/replicaset.yaml.json
 .lh/k8s/service.yaml.json
 .lh/.gitignore.json
+/.lh/.github/workflows/dev.yml.json
