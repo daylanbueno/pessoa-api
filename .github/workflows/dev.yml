@@ -35,9 +35,16 @@ jobs:
                 echo "RDS_PASSWORD=${{ secrets.RDS_PASSWORD }}" >> .env
                 echo "SPRING_PROFILES_ACTIVE=prod" >> .env
 
+            - name: Instalando Docker
+              run: |
+                sudo apt-get update
+                sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+
+            - name: Instalando Docker Compose
+              run: sudo apt-get install docker-compose -y
+
             - name: Construindo imagem
               run: docker-compose build
-
 
             - name: Push Docker image
               run: |
