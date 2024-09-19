@@ -33,7 +33,7 @@ jobs:
                 echo "RDS_PORT=${{ secrets.RDS_PORT }}" >> .env
                 echo "RDS_USERNAME=${{ secrets.RDS_USERNAME }}" >> .env
                 echo "RDS_PASSWORD=${{ secrets.RDS_PASSWORD }}" >> .env
-                echo "SPRING_PROFILES_ACTIVE=prod" >> .env
+                echo "spring.profiles.active=prod" >> .env
 
             - name: Instalando Docker
               run: |

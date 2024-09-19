@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: pessoa-replicaset
 spec:
-  replicas: 10
+  replicas: 1
   selector:
     matchLabels:
       app: pessoa-api
