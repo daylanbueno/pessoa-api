@@ -1,5 +1,7 @@
 "🚀 Desenvolvimento de API com Arquitetura Limpa: Aprenda na Prática! 🛠️
 
+Vídeo no YouTube mostrando passo a passo: https://youtu.be/MsskoOicoQo
+
 Você já ouviu falar sobre Arquitetura Limpa, mas ainda não sabe como aplicá-la na prática? Este vídeo é para você!
 
 Junte-se a nós nesta jornada de desenvolvimento de uma API do zero, enquanto exploramos os princípios fundamentais da Arquitetura Limpa. Aprenda como separar as preocupações de negócios das tecnológicas, garantindo um código limpo, modular e altamente testável.
